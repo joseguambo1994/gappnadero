@@ -1,23 +1,40 @@
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
+import CowComponent, { CowProps } from '../components/CowComponent';
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
+const arrayOfCows: CowProps[] = [{
+  name: 'Vaca1',
+  number: 1,
+  birthday: '01/12/2020'
+},
+{
+  name: 'Vaca2',
+  number: 2,
+  birthday: '01/12/2019'
+},
+{
+  name: 'Vaca3',
+  number: 33,
+  birthday: '03/10/2019'
+},
+]
 
 export default function TabTwoScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabTwoScreen.tsx" />
-    </View>
+    <ScrollView style={styles.container}>
+      {
+        arrayOfCows.map(item=>(<CowComponent
+          name={item.name}
+          number={item.number}
+          birthday={item.birthday}
+        ></CowComponent>))
+      }
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   title: {
     fontSize: 20,
