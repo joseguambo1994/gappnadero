@@ -52,6 +52,7 @@ export default function TabFourScreen({ navigation }: RootTabScreenProps<'TabTwo
     <ScrollView style={styles.container}>
       {
         arrayOfCows.map((item)=>(<CowComponent
+          id={item.id}
           name={item.name}
           number={item.number}
           birthday={item.birthday}

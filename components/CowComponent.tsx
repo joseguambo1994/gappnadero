@@ -1,7 +1,9 @@
  import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
  
  export type CowProps = {
+   id: string,
    name: string,
    number: number,
    birthday: string,
@@ -12,10 +14,21 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
  const CowComponent = (props: CowProps) => {
 
-  const {name, number, birthday, inseminada, saludable, ordenada} = props;
+  const {id, name, number, birthday, inseminada, saludable, ordenada} = props;
+  const navigation = useNavigation();
+
+  const handleNavigation = () => {
+    navigation.navigate(
+      'Root',
+      { screen:'TabFive', params:{animalId:id}}
+          );
+
+  }
 
    return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container}
+      onPress={()=>handleNavigation()}
+    >
       <Text style={styles.nameText}>{name}</Text>
       <Text style={styles.numberText}>{number}</Text>
       <Text style={styles.dateText}>{birthday}</Text>
