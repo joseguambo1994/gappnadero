@@ -1,13 +1,22 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { RootTabScreenProps } from '../types';
 import _ from 'lodash'; 
+import { useNavigation } from '@react-navigation/native';
+import SheepDetail from '../components/SheepDetail';
 
 export default function TabFiveScreen({ navigation }: RootTabScreenProps<'TabFive'>) {
+
+  const [animalId, setAnimalId] = useState('');
+  const navHook = useNavigation();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {
       console.log("getBookId: ",getBookId())
+      const tempBookId = getBookId();
+      if (!_.isNil(tempBookId) && tempBookId != ''){
+        setAnimalId(()=>getBookId());
+      }
     });
     return unsubscribe;
   }, [navigation]);
@@ -28,6 +37,9 @@ export default function TabFiveScreen({ navigation }: RootTabScreenProps<'TabFiv
 
   return (
     <View style={styles.container}>
+      {
+        animalId != '' ? <SheepDetail animalId={animalId} ></SheepDetail> : null
+      }
     </View>
   );
 }
@@ -35,8 +47,5 @@ export default function TabFiveScreen({ navigation }: RootTabScreenProps<'TabFiv
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'green',
   },
 });

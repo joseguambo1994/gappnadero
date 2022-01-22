@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet } from 'react-native';
-import CowComponent, { CowProps } from '../components/CowComponent';
+import SheepComponent, { SheepProps } from '../components/SheepComponent';
 import { collection, getDocs } from "firebase/firestore";
 import db from '../firebase';
 import { useEffect, useState } from 'react';
@@ -8,16 +8,17 @@ interface ISheep {
   id: string,
   name: string,
   number: number,
-  birthday: string,
-  inseminada: boolean,
-  saludable: boolean,
-  ordenada: boolean,
+  ill: boolean,
+  heat: boolean,
+  pregnant: boolean,
+  birthdayDate: string,
+  arrivalDate: string,
 }
 
-const emptyArray: CowProps[] = [];
+const emptyArray: SheepProps[] = [];
 
 export default function TabFourScreen({ navigation }: RootTabScreenProps<'TabTwo'>) {
-  const [arrayOfCows, setArrayOfCows] = useState(emptyArray);
+  const [arrayOfSheeps, setArrayOfSheeps] = useState(emptyArray);
 
   async function getData(){
     const querySnapshot = await getDocs(collection(db, "sheep"));
@@ -27,17 +28,18 @@ export default function TabFourScreen({ navigation }: RootTabScreenProps<'TabTwo
       
       console.log(doc.id, " => ", doc.data());
       tempItem= {
-        id: doc.id,
+        id: doc.id as string,
         name: doc.get("name"),
         number: Number(doc.get("number")),
-        birthday: doc.get("birthday").toDate().toDateString(),
-        inseminada: doc.get("inseminada"),
-        saludable: doc.get("saludable"),
-        ordenada: doc.get("ordenada"),
+        ill: doc.get("ill"),
+        heat: doc.get("heat"),
+        pregnant: doc.get("pregnant"),
+        birthdayDate: doc.get("birthdayDate").toDate().toDateString(),
+        arrivalDate: doc.get("birthdayDate").toDate().toDateString()
       }
       tempArray.push(tempItem);
     });
-    setArrayOfCows(()=>tempArray);
+    setArrayOfSheeps(()=>tempArray);
   }
 
   useEffect(() => {
@@ -51,15 +53,16 @@ export default function TabFourScreen({ navigation }: RootTabScreenProps<'TabTwo
   return (
     <ScrollView style={styles.container}>
       {
-        arrayOfCows.map((item)=>(<CowComponent
+        arrayOfSheeps.map((item)=>(<SheepComponent
           id={item.id}
           name={item.name}
           number={item.number}
-          birthday={item.birthday}
-          inseminada={item.inseminada}
-          saludable={item.saludable}
-          ordenada={item.ordenada}
-        ></CowComponent>))
+          birthdayDate={item.birthdayDate}
+          arrivalDate={item.arrivalDate}
+          ill={item.ill}
+          heat={item.heat}
+          pregnant={item.pregnant}
+        ></SheepComponent>))
       }
     </ScrollView>
   );
