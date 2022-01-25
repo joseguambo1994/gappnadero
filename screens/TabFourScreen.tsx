@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import SheepComponent, { SheepProps } from '../components/SheepComponent';
 import { collection, getDocs } from "firebase/firestore";
 import db from '../firebase';
@@ -52,6 +52,9 @@ export default function TabFourScreen({ navigation }: RootTabScreenProps<'TabTwo
 
   return (
     <ScrollView style={styles.container}>
+      <TouchableOpacity style={styles.addButton}>
+        <Text style={styles.addText}>+</Text>
+      </TouchableOpacity>
       {
         arrayOfSheeps.map((item)=>(<SheepComponent
           id={item.id}
@@ -73,4 +76,17 @@ const styles = StyleSheet.create({
     flex: 1,
     padding:5,
   },
+  addButton: {
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    backgroundColor:'purple',
+    justifyContent:'center',
+    alignItems:'center',
+    alignSelf:'flex-end',
+  },
+  addText: {
+    color: 'white',
+    fontSize: 30,
+  }
 });

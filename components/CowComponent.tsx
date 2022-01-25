@@ -5,16 +5,16 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
  export type CowProps = {
    id: string,
    name: string,
-   number: number,
+   code: string,
    birthday: string,
-   inseminada: boolean,
-   saludable: boolean,
-   ordenada: boolean
+   heat: boolean,
+   ill: boolean,
+   pregnant: boolean
  }
 
  const CowComponent = (props: CowProps) => {
 
-  const {id, name, number, birthday, inseminada, saludable, ordenada} = props;
+  const {id, name, code, birthday, heat, ill, pregnant} = props;
   const navigation = useNavigation();
 
   const handleNavigation = () => {
@@ -30,12 +30,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
       onPress={()=>handleNavigation()}
     >
       <Text style={styles.nameText}>{name}</Text>
-      <Text style={styles.numberText}>{number}</Text>
+      <Text style={styles.numberText}>{code}</Text>
       <Text style={styles.dateText}>{birthday}</Text>
       <View style={styles.buttonsContainer}>
-      {saludable ? <Ionicons name="md-heart" size={24} color="red" /> : null}
-      {inseminada ?   <Ionicons name="md-medkit" size={24} color="green" />: null}
-      {ordenada ?   <Ionicons name="ios-bug" size={24} color="purple" />: null}
+      {ill ? <Ionicons name="md-heart" size={24} color="red" /> : null}
+      {heat ?   <Ionicons name="md-medkit" size={24} color="green" />: null}
+      {pregnant ?   <Ionicons name="ios-bug" size={24} color="purple" />: null}
     </View>
     </TouchableOpacity>);
  }

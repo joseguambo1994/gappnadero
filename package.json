@@ -28,6 +28,7 @@
     "expo-status-bar": "~1.2.0",
     "expo-web-browser": "~10.1.0",
     "firebase": "^9.6.2",
+    "formik": "^2.2.9",
     "lodash": "^4.17.21",
     "react": "17.0.1",
     "react-dom": "17.0.1",

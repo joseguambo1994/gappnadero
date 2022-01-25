@@ -17,6 +17,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import TabFiveScreen from '../screens/TabFiveScreen';
 import TabFourScreen from '../screens/TabFourScreen';
 import TabOneScreen from '../screens/TabOneScreen';
+import TabSixScreen from '../screens/TabSixScreen';
 import TabThreeScreen from '../screens/TabThreeScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
@@ -61,7 +62,7 @@ function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="TabFour"
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
@@ -116,6 +117,14 @@ function BottomTabNavigator() {
         component={TabFiveScreen}
         options={{
           title: 'Tab Five',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+       <BottomTab.Screen
+        name="TabSix"
+        component={TabSixScreen}
+        options={{
+          title: 'Tab Six',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

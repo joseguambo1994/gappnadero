@@ -7,17 +7,17 @@ import { RootTabScreenProps } from '../types';
 
 // const arrayOfCows: CowProps[] = [{
 //   name: 'Vaca1',
-//   number: 1,
+//   code: 1,
 //   birthday: '01/12/2020',
 // },
 // {
 //   name: 'Vaca2',
-//   number: 2,
+//   code: 2,
 //   birthday: '01/12/2019'
 // },
 // {
 //   name: 'Vaca3',
-//   number: 33,
+//   code: 33,
 //   birthday: '03/10/2019'
 // },
 // ]
@@ -25,11 +25,11 @@ import { RootTabScreenProps } from '../types';
 interface ICow {
   id: string,
   name: string,
-  number: number,
+  code: string,
   birthday: string,
-  inseminada: boolean,
-  saludable: boolean,
-  ordenada: boolean,
+  heat: boolean,
+  ill: boolean,
+  pregnant: boolean,
 }
 
 const emptyArray: CowProps[] = [];
@@ -47,11 +47,11 @@ export default function TabTwoScreen({ navigation }: RootTabScreenProps<'TabTwo'
       tempItem= {
         id: doc.id,
         name: doc.get("name"),
-        number: Number(doc.get("number")),
-        birthday: doc.get("birthday").toDate().toDateString(),
-        inseminada: doc.get("inseminada"),
-        saludable: doc.get("saludable"),
-        ordenada: doc.get("ordenada"),
+        code: doc.get("code"),
+        birthday: doc.get("birthdayDate").toDate().toString(),
+        heat: doc.get("heat"),
+        ill: doc.get("ill"),
+        pregnant: doc.get("pregnant"),
       }
       tempArray.push(tempItem);
     });
@@ -72,11 +72,11 @@ export default function TabTwoScreen({ navigation }: RootTabScreenProps<'TabTwo'
         arrayOfCows.map((item)=>(<CowComponent
           id={item.id}
           name={item.name}
-          number={item.number}
+          code={item.code}
           birthday={item.birthday}
-          inseminada={item.inseminada}
-          saludable={item.saludable}
-          ordenada={item.ordenada}
+          heat={item.heat}
+          ill={item.ill}
+          pregnant={item.pregnant}
         ></CowComponent>))
       }
     </ScrollView>
